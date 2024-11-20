@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>题库展示</title>
+    <style>
+        .question-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+        .question-info {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>题库展示</h1>
+    <div class="question-container">
+        <div id="question-info" class="question-info"></div>
+        <div id="question-text" class="question-info"></div>
+        <div id="question-options" class="question-info"></div>
+        <div id="question-answer" class="question-info"></div>
+        <button id="next-button">下一题</button>
+        <div id="end-message" style="color: red; display: none;">已经是最后一题了！</div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let questions = [];
+
+        // 获取题库数据
+        fetch('http://localhost:3000/api/tiku')
+            .then(response => response.json())
+            .then(data => {
+                questions = data;
+
+                // 检查题库长度
+                if (questions.length <= 1) {
+                    document.getElementById('end-message').style.display = 'block';
+                    document.getElementById('next-button').style.display = 'none'; // 隐藏下一题按钮
+                } else {
+                    displayQuestion(currentQuestionIndex);
+                }
+            })
+            .catch(error => {
+                console.error('获取数据失败:', error);
+            });
+
+        // 显示指定索引的题目
+        function displayQuestion(index) {
+            const question = questions[index];
+            const questionInfo = document.getElementById('question-info');
+            const questionText = document.getElementById('question-text');
+            const questionOptions = document.getElementById('question-options');
+            const questionAnswer = document.getElementById('question-answer');
+
+            questionInfo.textContent = `题号: ${question.timu_id}, 题目类型: ${getQuestionType(question.timu_type)}`;
+            questionText.textContent = `题目: ${question.timu}`;
+
+            // 如果是选择题，将选项分割并显示
+            if (question.timu_type === 0 && question.xuanxiang) {
+                const options = splitOptions(question.xuanxiang);
+                let optionsHtml = '';
+                options.forEach((option, index) => {
+                    if (index % 2 === 1) { // 只处理偶数索引
+                        optionsHtml += `<p>${String.fromCharCode(65 + index/2)}. ${option.trim()}</p>`;
+                    }
+                });
+                questionOptions.innerHTML = optionsHtml;
+            } else {
+                questionOptions.textContent = question.xuanxiang ? `选项: ${question.xuanxiang}` : '无选项';
+            }
+
+            questionAnswer.textContent = `答案: ${question.daan}`;
+        }
+
+        // 获取题目类型名称
+        function getQuestionType(type) {
+            switch(type) {
+                case 0: return '选择题';
+                case 1: return '判断题';
+                case 2: return '填空题';
+                case 3: return '简答题';
+                default: return '未知类型';
+            }
+        }
+
+        // 分割选择题选项
+        function splitOptions(optionsText) {
+            return optionsText.split(/[.,，/]/);
+        }
+
+        // 下一题按钮点击事件
+        document.getElementById('next-button').addEventListener('click', () => {
+            currentQuestionIndex++;
+            const endMessage = document.getElementById('end-message');
+
+            if (currentQuestionIndex < questions.length) {
+                endMessage.style.display = 'none'; // 隐藏提示
+                displayQuestion(currentQuestionIndex);
+            } else {
+                endMessage.style.display = 'block'; // 显示提示
+                currentQuestionIndex = questions.length - 1; // 保持索引不超出范围
+            }
+        });
+    </script>
+</body>
+</html>
