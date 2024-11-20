@@ -1,0 +1,49 @@
+.container {
+  position: relative;
+  padding: 20px;
+}
+
+/* 右上角的历史记录按钮样式 */
+.history-button {
+  position: fixed;  /* 固定位置 */
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  background-color: #007AFF;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 10;  /* 置于最上层 */
+}
+
+/* 标题区域样式 */
+.title {
+  margin-top: 50px;  /* 留出空间，避免被按钮遮挡 */
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 题库列表样式 */
+.tiku-list {
+  padding: 0 10px;
+}
+
+.tiku-item {
+  padding: 15px;
+  background-color: #f3f3f3;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+}
+.option button {
+  background-color: #007aff;
+  color: white;
+  padding: 10rpx;
+  margin: 20rpx 0;
+  border-radius: 8rpx;
+  text-align: center;
+}
+

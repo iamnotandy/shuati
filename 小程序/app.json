@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/mainpage/mainpage",
+    "pages/logs/logs",
+    "pages/timu/timu",
+    "pages/history/history",
+    "pages/recordDetail/recordDetail",
+    "pages/addTiku/addTiku",
+    "pages/addQuestion/addQuestion"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

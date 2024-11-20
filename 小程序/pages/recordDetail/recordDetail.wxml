@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="title">答题详细记录</view>
+  <scroll-view scroll-y class="record-detail-list">
+    <block wx:for="{{historyDetails}}" wx:key="index">
+    <view class="record-item" style="background-color: {{item.is_correct ? '#BDFCC9' : '#FA8072'}}">
+      <view class="record-line">
+          <text class="record-label">用户答案: {{item.user_answer}}</text>
+        </view>
+        <view class="record-line">
+          <text class="record-label">是否正确: {{item.is_correct ? '正确' : '错误'}}</text>
+        </view>
+        <view class="record-line">
+          <text class="record-label">答题时间:</text>
+          <text class="record-value">{{item.timestamp}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

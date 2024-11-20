@@ -1,0 +1,67 @@
+<view class="question-container">
+  <!-- 显示当前题数和总题数 -->
+  <view class="question-number">
+    当前题目: {{currentQuestionIndex + 1}} / {{totalQuestions}}
+  </view>
+
+  <view class="question-text">
+    {{currentQuestion.text}}  <!-- 显示题目内容 -->
+  </view>
+
+  <!-- 如果是选择题 -->
+  <block wx:if="{{currentQuestion.type === 0}}">
+    <view class="options">
+      <block wx:for="{{options}}" wx:key="index">
+        <button
+          class="option-button {{selectedOption === item.letter ? 'selected' : ''}}"
+          bindtap="onOptionSelect"
+          data-answer="{{item.letter}}"
+        >
+          {{item.letter}}. {{item.content}}  <!-- 显示选项 -->
+        </button>
+      </block>
+    </view>
+  </block>
+
+  <!-- 如果是判断题 -->
+  <block wx:if="{{currentQuestion.type === 1}}">
+    <button
+      class="option-button {{selectedOption === '正确' ? 'selected' : ''}}"
+      bindtap="onOptionSelect"
+      data-answer="对"
+    >
+      正确
+    </button>
+    <button
+      class="option-button {{selectedOption === '错误' ? 'selected' : ''}}"
+      bindtap="onOptionSelect"
+      data-answer="错"
+    >
+      错误
+    </button>
+  </block>
+
+  <!-- 如果是填空题 -->
+  <block wx:if="{{currentQuestion.type === 2}}">
+    <input type="text" bindinput="onInputAnswer" placeholder="请输入答案" />
+  </block>
+</view>
+
+<view class="button-container">
+
+    <view class="navigation-buttons">
+    <!-- 上一题按钮 -->
+    <view class="next-button">
+      <button bindtap="onPrevious">上一题</button>
+    </view>
+    <!-- 下一题按钮 -->
+    <view class="next-button">
+      <button bindtap="onNext">下一题</button>
+    </view>
+    </view>
+
+    <!-- 提交答案按钮 -->
+    <view class="postanswer">
+      <button bindtap="submitAnswer">提交答案</button>
+    </view>
+  </view>

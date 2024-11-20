@@ -1,0 +1,29 @@
+
+<view class="container">
+  <!-- 固定在右上角的历史记录按钮 -->
+  <button class="history-button" bindtap="navigateToHistory">历史记录</button>
+
+  <!-- 滚动内容区域 -->
+  <scroll-view scroll-y class="scrollarea">
+    <view class="title">
+      <text>选择题库</text>
+    </view>
+
+    <!-- 遍历题库列表展示题库 -->
+    <view class="tiku-list">
+      <block wx:for="{{tikuList}}" wx:key="id">
+        <view class="tiku-item" bindtap="onTikuSelect" data-id="{{item.id}}">
+          <text>{{item.name}}</text>  <!-- 显示题库名称 -->
+        </view>
+
+
+      </block>
+    </view>
+
+    <view class="button-container">
+      <button class="btn" bindtap="navigateToAddQuestion">增加题目</button>
+      <button class="btn" bindtap="navigateToAddTiku">增加题库</button>
+    </view>
+
+  </scroll-view>
+</view>

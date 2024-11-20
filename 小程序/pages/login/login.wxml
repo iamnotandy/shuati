@@ -1,0 +1,7 @@
+<!-- login.wxml -->
+<view class="login-container">
+  <view class="login-title">登录</view>
+  <input class="input" type="text" placeholder="请输入用户名" bindinput="onUsernameInput" />
+  <input class="input" type="password" placeholder="请输入密码" password="true" bindinput="onPasswordInput" />
+  <button class="login-button" bindtap="onLogin">登录</button>
+</view>

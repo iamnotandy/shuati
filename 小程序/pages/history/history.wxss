@@ -1,0 +1,53 @@
+/* 容器样式 */
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* 标题样式 */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 滚动视图样式 */
+.record-list {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+/* 每一项记录的样式 */
+.record-item {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* 每行的样式 */
+.record-line {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between; /* 使label和value在行内分开 */
+}
+
+/* 字段名称（如“题目”、“正确答案”） */
+.record-label {
+  font-weight: bold;
+  color: #333;
+  width: 120px;
+}
+
+/* 字段值（如题目内容、正确答案、正确率） */
+.record-value {
+  color: #555;
+  flex-grow: 1; /* 使值的文本自适应宽度 */
+}
+
+/* 记录项的点击效果 */
+.record-item:hover {
+  background-color: #f9f9f9;
+}

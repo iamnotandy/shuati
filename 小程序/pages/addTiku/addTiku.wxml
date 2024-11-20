@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="title">增加题库</view>
+  <input
+    class="input"
+    placeholder="请输入题库名称"
+    bindinput="onInputChange"
+    value="{{tikuName}}"
+  />
+  <button class="submit-btn" bindtap="submitTiku">提交</button>
+</view>
